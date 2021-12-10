@@ -8,11 +8,12 @@ const flash = require('connect-flash');
 var methodOverride = require('method-override');
 const passport = require('passport');
 const ejsMate = require('ejs-mate');
+const ExpressError = require('./utils/ExpressError');
 const Review = require('./models/review');
 const restaurant = require('./routes/stores');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
-// const reviewRoutes = require('./routes/reviews');
+const reviewRoutes = require('./routes/review');
 
 const userRoutes = require('./routes/user');
 
@@ -70,31 +71,10 @@ app.use((req, res, next) => {
 
 app.use('/stores', restaurant);
 app.use('/', userRoutes);
+app.use('/stores/:id/review', reviewRoutes)
 
 app.get('/', (req, res)=>{
     res.render('home.ejs',{who:'McDonald Home'})
-})
-
-app.delete('/stores/:id/review/:rID', async (req, res)=>{
-    const {id, rID} = req.params;
-    await McDonald.findByIdAndUpdate(id, {$pull:{review: rID}});
-    await Review.findByIdAndDelete(rID);
-    res.redirect(`/stores/${id}`)
-})
-
-app.get('/mcDB', async (req, res)=>{
-    const firstMcDonald = new McDonald({location: 'Hanoi', localMenu:'pho burger'});
-    const s = await firstMcDonald.save();
-    res.send(firstMcDonald)
-})
-
-app.post('/stores/:id/review', async (req, res)=>{
-    const s = await McDonald.findById(req.params.id);
-    const r = new Review(req.body.review);
-    s.review.push(r);
-    await r.save();
-    await s.save();
-    res.redirect(`/stores/${s._id}`)
 })
 
 app.all('*', (req, res, next) => {

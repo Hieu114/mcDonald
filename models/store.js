@@ -8,6 +8,10 @@ const McSchema = new Schema({
     image: String,
     localMenu: String,
     fact: String,
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     review:[
         {
             type: Schema.Types.ObjectId, 

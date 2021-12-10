@@ -3,26 +3,26 @@
     <form action="/stores/<%= s._id %>?_method=PUT" method="POST" novalidate class="validated-form">
         <div class="mt-2">
         <label class ="form-label" for="location">Location:</label>
-        <input class ="form-control" type="text" name="location" id="location" value = "<%= s.location %> " required>
+        <input class ="form-control" type="text" name="store[location]" id="location" value = "<%= s.location %> " required>
     </div>
     <div class="mt-2">
         <label class ="form-label" for="price">Average price:</label>
         <div class="input-group">
             <span class="input-group-text">$</span>
-            <input class ="form-control" type="text" name="price" placeholder="0.0" aria-label="price" id="price" aria-label="price" aria-describedby="price-label" value="<%= s.price %> "required >
+            <input class ="form-control" type="text" name="store[price]" placeholder="0.0" aria-label="price" id="price" aria-label="price" aria-describedby="price-label" value="<%= s.price %> "required >
         </div>
     </div>
     <div class="mt-2">
         <label class ="form-label" for="image">Photo link:</label>
-        <input class ="form-control" type="text" name="image" id="image" value = "<%= s.image %> " required>
+        <input class ="form-control" type="text" name="store[image]" id="image" value = "<%= s.image %> " required>
     </div>
     <div class="mt-2">
         <label class ="form-label" for="localMenu">Local Menu:</label>
-        <input class ="form-control" type="text" name="localMenu" id="localMenu" value ="<%= s.localMenu %> " required>
+        <input class ="form-control" type="text" name="store[localMenu]" id="localMenu" value ="<%= s.localMenu %> " required>
     </div>
     <div class="mt-2">
         <label class ="form-label" for="fact">Fact:</label>
-        <input class ="form-control" type="text" name="fact" id="fact" value="<%= s.fact %>" required>
+        <input class ="form-control" type="text" name="store[fact]" id="fact" value="<%= s.fact %>" required>
     </div>
         <button class="btn btn-primary mt-3">Change</button>
         <div>
