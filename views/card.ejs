@@ -22,6 +22,7 @@
         </div>
     </div>
     <div class="col-6">
+        <div id='map' style='width: 100%; height: 300px;'></div>
         <% if (currentUser) { %> 
         <div>
             <h3>Please leave your rating here</h3>
@@ -68,3 +69,11 @@
         <% } %> 
     </div>
 </div>
+
+<script>
+    const mapToken = 'pk.eyJ1IjoiaGlldXR0cmFuIiwiYSI6ImNreDB4Zm95ZzEzOW8zMXBobzhoeHhtMGIifQ.iPTDgYA0L5fhzjMvo2tphg';
+</script>
+
+<script type="javascripts/text" src="/javascripts/pageMap.js">
+    const myStore = <%- JSON.stringify(store) %> 
+</script>

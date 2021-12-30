@@ -21,6 +21,10 @@ const cityDB = async () =>{
             location: data[0][i],
             localMenu: data[1][i],
             image:"https://images.unsplash.com/photo-1606720335177-3d04e70fb13b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2251&q=80",
+            geometry: {
+                type: "Point",
+                coordinates: [-113.1331, 47.0202]
+            },
         })
         s.save()
         console.log(s)

@@ -4,6 +4,9 @@ const McDonald = require('../models/store')
 const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError');
 const { isLoggedIn, validateMcDonald, isAuthor } = require('../middleware');
+const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
+const mapBoxToken = 'pk.eyJ1IjoiaGlldXR0cmFuIiwiYSI6ImNreDB4Zm95ZzEzOW8zMXBobzhoeHhtMGIifQ.iPTDgYA0L5fhzjMvo2tphg';
+const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 
 router.get('/', catchAsync(async (req, res)=>{
     const stores = await McDonald.find({});
@@ -11,7 +14,12 @@ router.get('/', catchAsync(async (req, res)=>{
 }))
 
 router.post('/', isLoggedIn, validateMcDonald, catchAsync(async (req, res, next)=>{
+    const geoData = await geocoder.forwardGeocode({
+        query: req.body.store.location,
+        limit: 1
+    }).send()
     const s = new McDonald(req.body.store)
+    s.geometry = geoData.body.features[0].geometry;
     s.author = req.user._id;
     await s.save()
     res.redirect(`/stores/${s._id}`)

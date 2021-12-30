@@ -6,6 +6,17 @@ const McSchema = new Schema({
     location: String,
     price: Number,
     image: String,
+    geometry: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }
+    },
     localMenu: String,
     fact: String,
     author: {
